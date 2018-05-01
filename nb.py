@@ -27,7 +27,7 @@ class tweets_ana:
 		x_train, x_test, y_train, y_test = train_test_split(x_vec, y, test_size=0.3, random_state = 50)
 		x_dev, x_test, y_dev, y_test = train_test_split(x_test, y_test, test_size=0.5, random_state = 50)
 		return x_train, x_dev, x_test, y_train, y_dev, y_test
-	
+	def grid_search
 
 if __name__ == '__main__':
 	# data = pd.read_csv('clean_tweet.csv')
@@ -47,11 +47,15 @@ if __name__ == '__main__':
 	predict = clf.predict(x_dev)
 	acc = np.mean(predict == y_dev)
 	print('svm = ', acc)
-	#knn
+	# knn
 	clf = KNeighborsClassifier(n_neighbors = 13).fit(x_train, y_train)
 	predict = clf.predict(x_dev)
 	acc = np.mean(predict == y_dev)
 	print('knn = ', acc)
-
+	# Logestic Regression
+	clf = KNeighborsClassifier(n_neighbors = 13).fit(x_train, y_train)
+	predict = clf.predict(x_dev)
+	acc = np.mean(predict == y_dev)
+	print('knn = ', acc)
 	# print(x_train.shape, x_dev.shape, x_test.shape)
 	# print(x_train[1, :])
