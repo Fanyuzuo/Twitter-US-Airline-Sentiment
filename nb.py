@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 import numpy as np
 from sklearn.linear_model import SGDClassifier
+from sklearn.neighbors import KNeighborsClassifier
 class tweets_ana:
 	# from text to feature vectors 
 	def count_vec(self, file):
@@ -36,16 +37,21 @@ if __name__ == '__main__':
 	x_tfidf = tweets_ana().tfidf(x_vec)
 	x_train, x_dev, x_test, y_train, y_dev, y_test = tweets_ana().data_split(x_tfidf,y)
 
+	# Naive Bayes: MultinomiaNB for classification with discrete features
 	clf = MultinomialNB().fit(x_train, y_train)
 	predict = clf.predict(x_dev)
 	acc = np.mean(predict == y_dev)
 	print("naive bayes = ", acc)
-
-	clf = SGDClassifier(loss = 'hinge', penalty = 'l2', alpha=1e-3, max_iter=5, tol=1e-3).fit(x_train, y_train)
+	# SVM with SGD training
+	clf = SGDClassifier(loss = 'hinge', penalty = 'l2', max_iter=5, tol=None).fit(x_train, y_train)
 	predict = clf.predict(x_dev)
 	acc = np.mean(predict == y_dev)
 	print('svm = ', acc)
-
+	#knn
+	clf = KNeighborsClassifier(n_neighbors = 13).fit(x_train, y_train)
+	predict = clf.predict(x_dev)
+	acc = np.mean(predict == y_dev)
+	print('knn = ', acc)
 
 	# print(x_train.shape, x_dev.shape, x_test.shape)
 	# print(x_train[1, :])
