@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-CSV_DATA = "./data/cleaned_data"
+CSV_DATA = "clean_tweet.csv"
 tweet=pd.read_csv(CSV_DATA)
 
 def fun(Airline):

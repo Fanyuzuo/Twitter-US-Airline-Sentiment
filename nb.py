@@ -6,6 +6,10 @@ from sklearn.naive_bayes import MultinomialNB
 import numpy as np
 from sklearn.linear_model import SGDClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
+from sklearn import metrics
 class tweets_ana:
 	# from text to feature vectors 
 	def count_vec(self, file):
@@ -27,7 +31,8 @@ class tweets_ana:
 		x_train, x_test, y_train, y_test = train_test_split(x_vec, y, test_size=0.3, random_state = 50)
 		x_dev, x_test, y_dev, y_test = train_test_split(x_test, y_test, test_size=0.5, random_state = 50)
 		return x_train, x_dev, x_test, y_train, y_dev, y_test
-	def grid_search
+	# def grid_search
+	# from text to feature vectors
 
 if __name__ == '__main__':
 	# data = pd.read_csv('clean_tweet.csv')
@@ -39,23 +44,42 @@ if __name__ == '__main__':
 
 	# Naive Bayes: MultinomiaNB for classification with discrete features
 	clf = MultinomialNB().fit(x_train, y_train)
-	predict = clf.predict(x_dev)
-	acc = np.mean(predict == y_dev)
+	predict_nb = clf.predict(x_dev)
+	acc = np.mean(predict_nb == y_dev)
 	print("naive bayes = ", acc)
 	# SVM with SGD training
 	clf = SGDClassifier(loss = 'hinge', penalty = 'l2', max_iter=5, tol=None).fit(x_train, y_train)
-	predict = clf.predict(x_dev)
-	acc = np.mean(predict == y_dev)
+	predict_svm = clf.predict(x_dev)
+	acc = np.mean(predict_svm == y_dev)
 	print('svm = ', acc)
 	# knn
 	clf = KNeighborsClassifier(n_neighbors = 13).fit(x_train, y_train)
-	predict = clf.predict(x_dev)
-	acc = np.mean(predict == y_dev)
+	predict_knn = clf.predict(x_dev)
+	acc = np.mean(predict_knn == y_dev)
 	print('knn = ', acc)
 	# Logestic Regression
-	clf = KNeighborsClassifier(n_neighbors = 13).fit(x_train, y_train)
-	predict = clf.predict(x_dev)
-	acc = np.mean(predict == y_dev)
-	print('knn = ', acc)
-	# print(x_train.shape, x_dev.shape, x_test.shape)
-	# print(x_train[1, :])
+	clf = LogisticRegression(multi_class= 'ovr').fit(x_train, y_train)
+	predict_lr = clf.predict(x_dev)
+	acc = np.mean(predict_lr == y_dev)
+	print('lr = ', acc)
+	# Pipeline
+	# clf_pipe = Pipeline([('vec', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB())])
+	# clf_pipe.fit(x_train, y_train)
+	# predict = clf_pipe.predict(x_dev)
+	# acc = np.mean(predict == y_dev)
+	# print('Pipeline', acc)
+	print(metrics.classification_report(y_dev, predict_nb))
+	print(metrics.classification_report(y_dev, predict_svm))
+	print(metrics.classification_report(y_dev, predict_knn))
+	print(metrics.classification_report(y_dev, predict_lr))
+
+
+
+
+
+
+
+
+
+
+
