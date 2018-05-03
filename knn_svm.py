@@ -7,8 +7,9 @@ from sklearn.svm import LinearSVC
 from sklearn import metrics
 
 data = pd.read_csv('clean_tweet.csv')
-X = data.Review
-y = data.Sentiment
+X = data['text']
+X = [word.strip() for word in X]
+y = data['airline_sentiment']
 
 #Using CountVectorizer to convert text into tokens/features
 vect = CountVectorizer(stop_words='english', ngram_range = (1,1), max_df = .80, min_df = 4)
