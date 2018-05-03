@@ -78,3 +78,4 @@ def softmax(z):
             
 if __name__ == '__main__':
     classifier()
+
