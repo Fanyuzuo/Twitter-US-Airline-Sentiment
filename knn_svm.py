@@ -12,7 +12,7 @@ X = [word.strip() for word in X]
 y = data['airline_sentiment']
 
 #Using CountVectorizer to convert text into tokens/features
-vect = CountVectorizer(stop_words='english', ngram_range = (1,1), max_df = .80, min_df = 4)
+vect = CountVectorizer(stop_words='english', ngram_range = (1,1))
 X_train, X_test, y_train, y_test = train_test_split(X,y,random_state=1, test_size= 0.2)
 
 #Using training data to transform text into counts of features for each message
