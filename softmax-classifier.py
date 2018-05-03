@@ -12,7 +12,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
-CSV_DATA = "/Users/aditya357/Downloads/Softmax-classifier/data/cleaned_data"
+CSV_DATA = "/Users/mohammad/Downloads/Softmax-classifier/data/cleaned_data"
 tweet=pd.read_csv(CSV_DATA)
 
 
@@ -78,4 +78,3 @@ def softmax(z):
             
 if __name__ == '__main__':
     classifier()
-
